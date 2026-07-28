@@ -1,0 +1,113 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-color: #e2e8f0;
+    --accent-color: #38bdf8;
+    --subtext-color: #94a3b8;
+    --border-color: #334155;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/* Mockup para tu foto de perfil */
+.profile-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-color);
+}
+
+.header-info h1 {
+    margin: 0;
+    color: var(--accent-color);
+    font-size: 2rem;
+    font-family: monospace;
+}
+
+.header-info h2 {
+    margin: 5px 0 0 0;
+    color: var(--subtext-color);
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+h3 {
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+    margin-top: 25px;
+    font-family: monospace;
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+ul, ol {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.item-title {
+    font-weight: bold;
+    color: #f8fafc;
+}
+
+.item-sub {
+    color: var(--subtext-color);
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.contact-info p {
+    margin: 5px 0;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.badge {
+    background-color: #0284c7;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-family: monospace;
+}
