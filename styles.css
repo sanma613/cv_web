@@ -16,16 +16,6 @@ body {
     padding: 20px;
 }
 
-.container {
-    max-width: 850px;
-    margin: 0 auto;
-    background-color: var(--card-bg);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color);
-}
-
 header {
     display: flex;
     align-items: center;
