@@ -1,0 +1,21 @@
+# Dependencias de Node (pesadas y autoregenerables)
+node_modules/
+
+# Archivos de compilación de TypeScript (código generado)
+dist/
+*.tsbuildinfo
+
+# Logs de error y ejecución
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Configuración y variables del entorno local
+.env
+.env.local
+
+# Archivos del sistema operativo y del editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

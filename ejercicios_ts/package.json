@@ -1,0 +1,16 @@
+{
+  "name": "ejercicios_ts",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "npx ts-node index.ts"
+  },
+  "author": "sanma613",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "typescript": "^7.0.2"
+  }
+}
