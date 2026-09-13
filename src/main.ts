@@ -244,3 +244,22 @@ window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e
         applyTheme(currentTheme);
     }
 });
+
+// --- Mobile Navigation Menu ---
+const menuToggleBtn = document.getElementById("menu-toggle") as HTMLButtonElement | null;
+const mainNav = document.getElementById("main-nav") as HTMLElement | null;
+
+if (menuToggleBtn && mainNav) {
+    menuToggleBtn.addEventListener("click", () => {
+        const isExpanded = menuToggleBtn.getAttribute("aria-expanded") === "true";
+        menuToggleBtn.setAttribute("aria-expanded", String(!isExpanded));
+        mainNav.classList.toggle("is-open", !isExpanded);
+    });
+
+    mainNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+            menuToggleBtn.setAttribute("aria-expanded", "false");
+            mainNav.classList.remove("is-open");
+        });
+    });
+}

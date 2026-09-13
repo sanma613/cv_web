@@ -467,3 +467,104 @@ textarea:focus {
     color: var(--text-muted);
     padding: 2rem 0;
 }
+
+.menu-toggle-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0;
+    transition: border-color var(--theme-transition), background-color var(--theme-transition);
+}
+
+.menu-toggle-btn:hover {
+    border-color: var(--accent-cyan);
+}
+
+.hamburger-bar {
+    width: 18px;
+    height: 2px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease, background-color var(--theme-transition);
+}
+
+.menu-toggle-btn[aria-expanded="true"] .hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle-btn[aria-expanded="true"] .hamburger-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle-btn[aria-expanded="true"] .hamburger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav-theme-item {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 640px) {
+    .menu-toggle-btn {
+        display: flex;
+    }
+
+    .header-actions {
+        gap: 0.75rem;
+    }
+
+    .nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 1.5rem;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.25s ease, background-color var(--theme-transition), border-color var(--theme-transition);
+    }
+
+    .nav.is-open {
+        max-height: 240px;
+        padding: 1.25rem 1.5rem;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.1rem;
+        width: 100%;
+    }
+
+    .nav-list a {
+        font-size: 1.05rem;
+    }
+
+    .nav-theme-item {
+        width: 100%;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .nav-theme-item .theme-toggle-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.55rem 1rem;
+        font-size: 0.9rem;
+    }
+}
