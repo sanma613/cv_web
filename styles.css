@@ -83,3 +83,60 @@ body {
     max-width: 600px;
     margin: 0 auto;
 }
+
+.catalog-section,
+.form-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+.section-heading h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-heading p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+select,
+input,
+textarea {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--accent-cyan);
+    border-color: transparent;
+}
