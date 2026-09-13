@@ -5,11 +5,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>ICPC Grind — Competitive Programming Hub</title>
 </head>
 
 <body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-symbol">&gt;_</span>
+                <span class="logo-text">ICPC Grind</span>
+            </div>
+            <nav class="nav" aria-label="Main Navigation">
+                <ul class="nav-list">
+                    <li><a href="#catalog">Problemset</a></li>
+                    <li><a href="#submit">Submit Problem</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Master Graphs &amp; Geometry for ICPC</h1>
+                <p>A curated set of competitive programming problems from Codeforces, CSES, and AtCoder tailored for
+                    collegiate teams.</p>
+            </div>
+        </section>
+
+        <section id="catalog" class="catalog-section">
+            <div class="section-heading">
+                <h2>Curated Problemset</h2>
+                <p>Filter by algorithmic topic and difficulty level.</p>
+            </div>
+
+            <div class="filters-container" aria-label="Catalog Filters">
+                <div class="filter-group">
+                    <label for="filter-topic">Topic:</label>
+                    <select id="filter-topic">
+                        <option value="all">All Topics</option>
+                        <option value="graphs">Graphs</option>
+                        <option value="geometry">Computational Geometry</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-difficulty">Difficulty:</label>
+                    <select id="filter-difficulty">
+                        <option value="all">All Difficulties</option>
+                        <option value="easy">Easy (~1200–1400)</option>
+                        <option value="medium">Medium (~1500–1800)</option>
+                        <option value="hard">Hard (&gt;1900)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="problems-grid" class="problems-grid" role="region" aria-live="polite">
+                <!-- Container para la futura renderizacion de problemas -->
+            </div>
+        </section>
+
+        <section id="submit" class="form-section">
+            <div class="form-container">
+                <h2>Suggest a Problem</h2>
+                <p>Found a benchmark problem during a contest? Add it to the practice backlog.</p>
+
+                <form id="suggest-form" novalidate>
+                    <div class="form-control">
+                        <label for="problem-name">Problem Name</label>
+                        <input type="text" id="problem-name" name="name"
+                            placeholder="e.g. Flight Discount or Convex Hull">
+                        <span class="error-msg" id="error-name" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="problem-link">Problem URL</label>
+                        <input type="url" id="problem-link" name="link"
+                            placeholder="https://codeforces.com/problemset/problem/...">
+                        <span class="error-msg" id="error-link" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-control">
+                            <label for="form-topic">Topic</label>
+                            <select id="form-topic" name="topic">
+                                <option value="">Select topic...</option>
+                                <option value="graphs">Graphs</option>
+                                <option value="geometry">Computational Geometry</option>
+                            </select>
+                            <span class="error-msg" id="error-topic" aria-live="polite"></span>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="form-difficulty">Difficulty Rating</label>
+                            <select id="form-difficulty" name="difficulty">
+                                <option value="">Select level...</option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                            <span class="error-msg" id="error-difficulty" aria-live="polite"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="problem-desc">Editorial Summary (min 20 chars)</label>
+                        <textarea id="problem-desc" name="description" rows="3"
+                            placeholder="Briefly describe the key algorithmic technique (e.g. Graham Scan, DSU, Dinic)"></textarea>
+                        <span class="error-msg" id="error-desc" aria-live="polite"></span>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Submit Problem</button>
+                    <div id="form-success" class="success-banner" hidden>
+                        Problem added to local review queue!
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 ICPC Grind — Built by competitive programmers for competitive programmers.</p>
+    </footer>
+
+    <script type="module" src="dist/main.js"></script>
 </body>
 
 </html>
