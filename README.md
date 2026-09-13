@@ -5,3 +5,4 @@ Para documentar las decisiones sobre la marcha y no dejar todo para el final, ir
 - El contenido del HTML sera todo en ingles debido a que es el estandar en programacion, ademas de que asi es como se presentan dichos problemas y es con lo que la comunidad de PC (programacion competitiva) esta familiarizada.
 - Uso de variables en CSS para evitar duplicar codigo y centralizar estilos para cambios mas rapidos.
 - Se introduce --accent-red exclusivamente para los mensajes de error del formulario. Se maqueta el contenedor centrado del formulario y el footer.
+- En esta hora se introdujo una estructura modular de ts con src, separamos el codigo en types, data y main.  (todos son problemas reales), finalmente se creo el main.ts que se encarga de renderizar los problemas y el css de las tarjetas de estos. No quise saturar todos estos cambios dentro de un mismo commit asi que por eso se separaron segun correspondia.
