@@ -1,20 +1,137 @@
-Para documentar las decisiones sobre la marcha y no dejar todo para el final, iré registrando cada elección técnica y su motivo a modo de bitácora. Al concluir el desarrollo, añadiré las secciones restantes (capturas desktop/mobile y descripción general) y me apoyaré en IA para pulir la redacción final de forma fluida y clara. Durante el proceso mantendré mis notas con mi propia voz, reflejando la evolución real del proyecto y dejando constancia de mi autoría en cada decisión.
+# ICPC Grind — Competitive Programming Hub
 
-# Decisiones:
-- A pesar de que en la rubrica planteada en la UVirtual especifica el uso de JavaScript, se decide usar TypeScript debido a que es con lo que hemos venido trabajando, además de que nos brinda mayor seguridad en el tipado.
-- El contenido del HTML sera todo en ingles debido a que es el estandar en programacion, ademas de que asi es como se presentan dichos problemas y es con lo que la comunidad de PC (programacion competitiva) esta familiarizada.
-- Uso de variables en CSS para evitar duplicar codigo y centralizar estilos para cambios mas rapidos.
-- Se introduce --accent-red exclusivamente para los mensajes de error del formulario. Se maqueta el contenedor centrado del formulario y el footer.
-- Algo que no mencione es que para el navbar se uso un estilo sticky para que baje junto con la pantalla del usuario y asi el no tenga siempre que subir a buscarla
-- En esta hora se introdujo una estructura modular de ts con src, separamos el codigo en types, data y main.  (todos son problemas reales), finalmente se creo el main.ts que se encarga de renderizar los problemas y el css de las tarjetas de estos asi como de hacer verificaciones sobre el form. No quise saturar todos estos cambios dentro de un mismo commit asi que por eso se separaron segun correspondia.
-- Aunque en esta entrega no hay base de datos ni backend para guardar nada, preferí dejar lista la validación del formulario de una vez (campos requeridos, largo mínimo y formato de URL). Así para la Entrega 2 la interfaz ya queda lista y solo tengo que cambiar la inserción local por la llamada a la API.
-- No quise usar `alert()` para los errores porque interrumpe feo la experiencia. Puse los mensajes en un `<span>` justo debajo de cada campo para que se vea claro dónde estuvo el fallo y no se sienta tosco.
-- Cuando el formulario pasa la validación, meto el problema al inicio de la lista y vuelvo a llamar la función de los filtros. Así se pinta de una en la pantalla y respeta lo que el usuario tenga seleccionado en ese momento.
-- Algo importante a mencionar es que el flujo real sera que cuando un usuario envie el formulario de sugerencia, se le notificara a un administrador de la pagina para que este pueda aprobar la publicacion de dicho problemaa y hasta no ser aprobado no se renderizara en la pagina. Con el fin de mostrar todo el flujo sin necesidad de tener el backend para este comportamiento, apenas se envia el form se renderiza el nuevo problema.
-- Para evitar un doble envio del formulario, mientras se envia la informacion al backend (aca se simula con un setTimeout ya que al no haber backend la respuesta es sin latencia) se desactiva el boton temporalmente.
-- Para el modo oscuro puse un orden de prioridades: primero mira si el usuario ya había guardado su preferencia; si no tiene ninguna, toma la que tenga por defecto en su dispositivo (prefers-color-scheme), y si la cambia a mano, a partir de ahí se prioriza lo que él eligió. Por ahora se guarda en localStorage, lo cual sirve bien pero depende de que use el mismo navegador y dispositivo. Más adelante la idea es migrar esas preferencias a una base de datos cuando meta backend y login.
-- Una decisión para mejorar la UX fue quitar un flasheo incómodo que pasaba al recargar: si la preferencia del dispositivo era distinta a la guardada, se alcanzaba a ver la transición de colores a destiempo. Para arreglarlo le puse una clase temporal llamada preload al body que apaga las transiciones mientras la página carga por primera vez y luego se quita, así la transición suave de 0.4s solo se nota cuando la persona hunde el botón de cambiar tema.
-- Algo interesante es que la etiqueta que aparece en la esquina inferior izquierda de cada tarjeta se renderiza automaticamente mediante el TypeScript, lo que hace es que a partir de la URL proporcionada extrae hostname y identifica si es alguno de los que estan en la lista de plataformas soportadas (por ahora Codeforces, CSES y AtCoder) y si no encuentra ninguno de estos, muestra la etiqueta Community.
-- No hay verificaciones de la URL mas que su estructura, el que sea funcional y de intereses asi como asertado para el proposito va del critierio del admin
-- Como decision de diseno no se renderiza todo el texto que se puso en la descripcion sino cierta parte y a la otra se le aplica un fade out. Esto no es un problema ya que como se ponen links funcionales (como se menciona arriba que pasan por un filtro) el usuario podra consultar el resto del texto en la fuente original.
-- Con el item de arriba va una consideracion tecnica y de diseno interesante, pues todos los links deben apuntar a problemas de otras plataformas para no tener que implementar sandboxes para correr y evaluar sino que esta iniciativa va mas orientada a recopilar.
+Plataforma web accesible, reactiva y responsiva desarrollada para centralizar y clasificar problemas algorítmicos de diferentes jueces en línea (Codeforces, CSES, AtCoder), pensada específicamente para el entrenamiento de equipos colegiados de ICPC.
+
+* **Deploy en producción:** [https://csesgrind-bbkg0ayf2-sanma613s-projects.vercel.app/](https://csesgrind-bbkg0ayf2-sanma613s-projects.vercel.app/)
+
+---
+
+### Descripción del proyecto
+
+ICPC Grind nace como una solución para equipos colegiados que necesitan un entrenamiento curado y enfocado en tópicos clave (como grafos y geometría computacional). En lugar de montar evaluadores y sandboxes aislados desde cero para compilar y ejecutar código, el proyecto funciona como un agregador inteligente: recopila problemas de calidad, detecta automáticamente la plataforma de origen mediante la URL, permite filtrar de inmediato por dificultad o tema, y ofrece un canal para que la comunidad sugiera nuevos problemas para revisión. Todo el contenido se redactó en inglés porque es el estándar global en programación competitiva y el formato oficial en el que se presentan los certámenes de ICPC.
+
+---
+
+### Capturas de pantalla
+
+#### Vista Escritorio
+
+* **Catálogo curado, filtros y encabezado:**
+  ![Catálogo en Escritorio](./assets/screenshots/desktop1.png)
+
+* **Formulario de sugerencia de problemas:**
+  ![Formulario en Escritorio](./assets/screenshots/desktop2.png)
+
+#### Vista Móvil
+
+* **Menú hamburguesa desplegado con selector de tema integrado:**
+  ![Menú móvil y filtros](./assets/screenshots/mobile1.png)
+
+* **Catálogo adaptado a una sola columna:**
+  ![Catálogo en móvil](./assets/screenshots/mobile2.png)
+
+* **Formulario responsivo con campos apilados verticalmente:**
+  ![Formulario en móvil](./assets/screenshots/mobile3.png)
+
+---
+
+### Decisiones técnicas
+
+**Arquitectura y maquetación (Flexbox vs. CSS Grid)**
+
+* **CSS Grid (`.problems-grid`):** Se utilizó Grid bidimensional exclusivamente para el catálogo principal. Esto asegura una distribución regular por columnas (1 columna en móviles, 2 en tablets y 3 en escritorios) manteniendo una alineación perfecta entre tarjetas sin importar el contenido.
+
+
+* **Flexbox:** Se implementó en componentes unidireccionales como la barra de navegación pegajosa, el contenedor de filtros (`flex-wrap: wrap`) y dentro de cada tarjeta (`.card`). En las tarjetas, `display: flex; flex-direction: column; justify-content: space-between; height: 100%` garantiza que el pie de página (`.card-footer`) quede clavado al fondo y todas las cards compartan la misma altura en la fila.
+
+
+* **Navegación pegajosa:** El `header` utiliza `position: sticky; top: 0` para acompañar el desplazamiento de la página sin obligar al usuario a subir manualmente para filtrar o alternar el tema visual.
+
+
+
+**Lógica y ciclo de vida de la aplicación (TypeScript / JS)**
+
+* **Tipado estricto y modularidad:** A pesar de que la pauta inicial planteaba JavaScript estándar, decidí trabajar con TypeScript bajo la carpeta `src/` modularizado en `types.ts`, `data.ts` y `main.ts`. Esto me permitió contar con interfaces claras (`Problem`, `Topic`, `Difficulty`) y evitar errores de tipado en tiempo de ejecución.
+
+
+* **Detección automática de plataforma:** La función `detectSource()` analiza la estructura del enlace ingresado para catalogar si proviene de Codeforces, CSES, AtCoder o Community, inyectando de forma dinámica el ícono oficial correspondiente.
+
+
+* **Filtrado dinámico:** Al cambiar los selectores de tema, dificultad o plataforma, la interfaz actualiza la vista en memoria sin recargar el navegador. Si ningún ejercicio coincide, muestra un mensaje accesible mediante la clase `.empty-catalog`.
+
+
+* **Formulario y simulación de backend:** El formulario cuenta con validación manual estricta (campos obligatorios, longitud mínima de 20 caracteres y URLs con protocolo válido). Los errores se renderizan en línea debajo de cada campo con elementos `<span>` asociados para evitar el uso intrusivo de `alert()`. Al enviar, se deshabilita temporalmente el botón para mitigar dobles envíos y se renderiza el problema inmediatamente al inicio de la lista local.
+
+
+* **Gestión de tema (Modo Oscuro / Claro):** Sigue un orden de prioridades claro: preferencia manual en `localStorage` > preferencia del sistema (`prefers-color-scheme`) > modo oscuro por defecto.
+
+
+
+**Accesibilidad (A11y)**
+
+* Navegación por teclado fluida con anillos de enfoque (`:focus-visible`) explícitos en botones, enlaces e inputs.
+
+
+* Contraste de texto ajustado en tema claro (`#4b5563`).
+
+
+* Íconos de plataforma con etiquetas `alt` reales y descriptivas (ej. `"CSES problem set official wooden logo"`, `"Codeforces online judge icon"`) en lugar de atributos vacíos.
+
+
+* Formularios y contenedores accesibles con atributos ARIA estructurados (`aria-describedby`, `aria-required="true"`, `aria-live="polite"`, `role="region"`).
+
+
+
+---
+
+### Retos y lo más difícil del desarrollo
+
+* **Manejo del ciclo de vida del DOM y parpadeos (`.preload`):**
+Lo más retador no fue programar la lógica del modo oscuro, sino toparme con el molesto flasheo de transición al recargar la página. Al no haber usado antes patrones como la clase temporal `.preload` en el `body`, el problema era de puro desconocimiento sobre cómo el navegador dispara las transiciones CSS antes de que el script termine de aplicar las variables del tema. Entender que debía apagar todas las transiciones con `transition: none !important` durante el primer frame y remover la clase justo después de leer el `localStorage` fue una curva de aprendizaje interesante para lograr que la interfaz cargara limpia.
+
+
+* **Estandarización de alturas y el desvanecimiento de texto (*fade-out*):**
+Mantener la simetría de la cuadrícula con descripciones de longitud variable fue otro reto complejo. Si se usaba `-webkit-line-clamp`, el texto se cortaba de golpe como si estuviera roto; y si se ponía un gradiente tradicional encima con `::after`, se tapaban renglones en textos que apenas ocupaban una o dos líneas. La dificultad estuvo en dar con una solución limpia que no dependiera de trucos frágiles ni llenara el código de condicionales en JavaScript, resolviéndolo finalmente con una máscara alfa (`mask-image`) para que el desvanecimiento fuera puramente visual y respetara la estética de las tarjetas.
+
+
+* **Ajuste y proporción de recursos locales:**
+Alinear íconos con relaciones de aspecto dispares (como el logo horizontal de CSES frente a los formatos cuadrados de Codeforces o AtCoder) requirió balancear propiedades como `object-fit: contain` y `max-width` para que el pie de la tarjeta no se descuadrara al redimensionar la ventana o navegar con teclado.
+
+
+
+---
+
+### Bitácora cronológica de desarrollo
+
+*Para documentar las decisiones sobre la marcha y no dejar todo para el final, fui registrando cada elección técnica y su motivo a modo de bitácora. Todo el desarrollo, la lógica y la arquitectura fueron implementados por mí mismo, manteniendo mis notas con mi propia voz a lo largo del proceso para reflejar la evolución real del proyecto y dejar constancia de mi autoría en cada decisión. Al concluir el desarrollo me apoyé en IA únicamente para pulir la redacción final de este documento de forma fluida y clara.*
+
+* **Inicio y configuración inicial:** Decisión de usar TypeScript en lugar de JavaScript estándar por seguridad de tipos y mantenimiento. Configuración de tokens de diseño en `:root` para centralizar paletas de color y soporte inicial de temas claro/oscuro.
+
+
+* **Modularización:** División del proyecto bajo `src/` (`types.ts`, `data.ts`, `main.ts`). Creación del set inicial con problemas reales de grafos y geometría de CSES.
+
+
+* **Maquetación responsiva:** Estructuración de la cuadrícula de problemas con CSS Grid y montaje del `header` pegajoso con Flexbox.
+
+
+* **Validación y UX en formulario:** Reemplazo de alertas nativas por mensajes de error en línea (`.error-msg`) bajo cada input. Desactivación temporal del botón de envío para mitigar dobles clicks accidentales.
+
+
+* **Modo oscuro sin saltos de transición:** Implementación de persistencia con `localStorage`, escucha de eventos del sistema y eliminación del destello de carga con la clase `.preload`.
+
+
+* **Detección de plataformas:** Creación del analizador de URLs para extraer el dominio y clasificar automáticamente si el problema pertenece a Codeforces, CSES, AtCoder o Community.
+
+
+* **Accesibilidad e integración visual:** Limpieza de errores en el validador semántico, adición de estados `:focus-visible`, aumento de contraste en tipografía y vinculación de íconos locales con textos alternativos (`alt`) específicos.
+
+
+* **Estandarización de tarjetas:** Implementación de `mask-image` para desvanecer suavemente descripciones extensas y fijar la cuadrícula a alturas simétricas.
+
+
+
+---
+
+### Uso de Inteligencia Artificial
+
+* **Uso de IA:** Todo el desarrollo, estructuración del código y elecciones técnicas fueron ejecutados por mí a lo largo del proceso. Me apoyé en herramientas de IA de forma puntual como asistente de depuración para diagnosticar errores específicos (como advertencias del validador de accesibilidad y detalles del ciclo de renderizado en CSS) y, al concluir la implementación, para organizar los encabezados y pulir la redacción final de esta documentación de manera clara y profesional[cite: 7].
