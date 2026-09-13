@@ -2,7 +2,7 @@
 
 Plataforma web accesible, reactiva y responsiva desarrollada para centralizar y clasificar problemas algorítmicos de diferentes jueces en línea (Codeforces, CSES, AtCoder), pensada específicamente para el entrenamiento de equipos colegiados de ICPC.
 
-* **Deploy en producción:** [https://csesgrind-bbkg0ayf2-sanma613s-projects.vercel.app/](https://csesgrind-bbkg0ayf2-sanma613s-projects.vercel.app/)
+* **Deploy en producción:** [https://csesgrind.vercel.app/](https://csesgrind.vercel.app/)
 
 ---
 
