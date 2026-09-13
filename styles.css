@@ -567,4 +567,13 @@ textarea:focus {
         padding: 0.55rem 1rem;
         font-size: 0.9rem;
     }
+
+    .form-container {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
 }
