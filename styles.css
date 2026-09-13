@@ -10,6 +10,7 @@
     --accent-green: #3fb950;
     --accent-yellow: #d29922;
     --btn-submit-text: #000000;
+    --card-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.35);
     --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: "Fira Code", monospace, monospace;
     --theme-transition: 0.4s ease;
@@ -24,6 +25,7 @@
     --text-muted: #656d76;
     --accent-cyan: #0969da;
     --btn-submit-text: #ffffff;
+    --card-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -91,7 +93,7 @@ body {
     color: var(--text-muted);
     text-decoration: none;
     font-weight: 500;
-    transition: color var(--theme-transition);
+    transition: color 0.2s;
 }
 
 .nav-list a:hover {
@@ -223,11 +225,15 @@ textarea:focus {
     font-weight: 600;
     cursor: pointer;
     width: 100%;
-    transition: opacity 0.2s, background-color var(--theme-transition), color var(--theme-transition);
+    transition: opacity 0.2s, transform 0.15s ease, background-color var(--theme-transition), color var(--theme-transition);
 }
 
 .btn-submit:hover {
     opacity: 0.9;
+}
+
+.btn-submit:active {
+    transform: scale(0.99);
 }
 
 .btn-submit:disabled {
@@ -235,6 +241,7 @@ textarea:focus {
     color: var(--text-muted);
     opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
 }
 
 .success-banner {
@@ -244,6 +251,19 @@ textarea:focus {
     color: #a7f3d0;
     border-radius: 6px;
     text-align: center;
+    animation: fadeInScale 0.25s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .footer {
@@ -281,7 +301,13 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: background-color var(--theme-transition), border-color var(--theme-transition);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color var(--theme-transition), background-color var(--theme-transition);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--accent-cyan);
 }
 
 .card-header {
