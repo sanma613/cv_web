@@ -134,6 +134,23 @@ if (filterSource) {
     filterSource.addEventListener("change", applyFilters);
 }
 
+// Enhance keyboard accessibility: open dropdown with Enter or Space, avoiding accidental form submit
+document.querySelectorAll<HTMLSelectElement>("select").forEach((select) => {
+    select.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            const picker = (select as HTMLSelectElement & { showPicker?: () => void }).showPicker;
+            if (typeof picker === "function") {
+                try {
+                    picker.call(select);
+                } catch {
+                    // Native fallback
+                }
+            }
+        }
+    });
+});
+
 form.addEventListener("submit", (e: SubmitEvent) => {
     e.preventDefault();
     clearErrors();

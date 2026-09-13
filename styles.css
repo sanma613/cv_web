@@ -534,7 +534,8 @@ textarea:focus {
         overflow: hidden;
         opacity: 0;
         pointer-events: none;
-        transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.25s ease, background-color var(--theme-transition), border-color var(--theme-transition);
+        visibility: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.25s ease, visibility 0.3s ease, background-color var(--theme-transition), border-color var(--theme-transition);
     }
 
     .nav.is-open {
@@ -542,6 +543,7 @@ textarea:focus {
         padding: 1.25rem 1.5rem;
         opacity: 1;
         pointer-events: auto;
+        visibility: visible;
     }
 
     .nav-list {
