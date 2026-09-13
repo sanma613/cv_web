@@ -9,8 +9,21 @@
     --accent-red: #f85149;
     --accent-green: #3fb950;
     --accent-yellow: #d29922;
+    --btn-submit-text: #000000;
     --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: "Fira Code", monospace, monospace;
+    --theme-transition: 0.4s ease;
+}
+
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --bg-card: #ffffff;
+    --border-color: #d0d7de;
+    --text-primary: #1f2328;
+    --text-muted: #656d76;
+    --accent-cyan: #0969da;
+    --btn-submit-text: #ffffff;
 }
 
 * {
@@ -19,11 +32,17 @@
     padding: 0;
 }
 
+body.preload,
+body.preload * {
+    transition: none !important;
+}
+
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: var(--font-sans);
     line-height: 1.6;
+    transition: background-color var(--theme-transition), color var(--theme-transition);
 }
 
 .header {
@@ -32,6 +51,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color var(--theme-transition), border-color var(--theme-transition);
 }
 
 .header-container {
@@ -43,6 +63,12 @@ body {
     align-items: center;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -51,10 +77,12 @@ body {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--accent-cyan);
+    transition: color var(--theme-transition);
 }
 
 .nav-list {
     display: flex;
+    align-items: center;
     gap: 1.5rem;
     list-style: none;
 }
@@ -63,7 +91,7 @@ body {
     color: var(--text-muted);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color var(--theme-transition);
 }
 
 .nav-list a:hover {
@@ -74,18 +102,21 @@ body {
     padding: 4rem 1.5rem;
     text-align: center;
     border-bottom: 1px solid var(--border-color);
+    transition: border-color var(--theme-transition);
 }
 
 .hero h1 {
     font-size: 2.25rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
+    transition: color var(--theme-transition);
 }
 
 .hero p {
     color: var(--text-muted);
     max-width: 600px;
     margin: 0 auto;
+    transition: color var(--theme-transition);
 }
 
 .catalog-section,
@@ -98,11 +129,13 @@ body {
 .section-heading h2 {
     font-size: 1.75rem;
     margin-bottom: 0.5rem;
+    transition: color var(--theme-transition);
 }
 
 .section-heading p {
     color: var(--text-muted);
     margin-bottom: 2rem;
+    transition: color var(--theme-transition);
 }
 
 .filters-container {
@@ -114,6 +147,7 @@ body {
     padding: 1rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
+    transition: background-color var(--theme-transition), border-color var(--theme-transition);
 }
 
 .filter-group {
@@ -125,6 +159,7 @@ body {
 .filter-group label {
     font-size: 0.875rem;
     color: var(--text-muted);
+    transition: color var(--theme-transition);
 }
 
 select,
@@ -137,6 +172,7 @@ textarea {
     padding: 0.65rem 0.75rem;
     font-size: 0.875rem;
     resize: none;
+    transition: background-color var(--theme-transition), border-color var(--theme-transition), color var(--theme-transition);
 }
 
 select:focus,
@@ -153,6 +189,7 @@ textarea:focus {
     padding: 2rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
+    transition: background-color var(--theme-transition), border-color var(--theme-transition);
 }
 
 .form-control {
@@ -179,14 +216,14 @@ textarea:focus {
 
 .btn-submit {
     background-color: var(--accent-cyan);
-    color: #000;
+    color: var(--btn-submit-text);
     border: none;
     border-radius: 6px;
     padding: 0.75rem 1.5rem;
     font-weight: 600;
     cursor: pointer;
     width: 100%;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, background-color var(--theme-transition), color var(--theme-transition);
 }
 
 .btn-submit:hover {
@@ -215,6 +252,7 @@ textarea:focus {
     border-top: 1px solid var(--border-color);
     color: var(--text-muted);
     font-size: 0.875rem;
+    transition: border-color var(--theme-transition), color var(--theme-transition);
 }
 
 .problems-grid {
@@ -243,6 +281,7 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: background-color var(--theme-transition), border-color var(--theme-transition);
 }
 
 .card-header {
@@ -256,6 +295,7 @@ textarea:focus {
     font-size: 1.15rem;
     font-weight: 600;
     color: var(--text-primary);
+    transition: color var(--theme-transition);
 }
 
 .badges {
@@ -270,31 +310,10 @@ textarea:focus {
     border-radius: 4px;
     text-transform: capitalize;
     font-family: var(--font-mono);
-}
-
-.badge-grafos {
-    background-color: #1e3a8a;
-    color: #93c5fd;
-}
-
-.badge-geometria {
-    background-color: #581c87;
-    color: #d8b4fe;
-}
-
-.badge-facil {
-    background-color: #064e3b;
-    color: #6ee7b7;
-}
-
-.badge-medio {
-    background-color: #713f12;
-    color: #fde047;
-}
-
-.badge-dificil {
-    background-color: #7f1d1d;
-    color: #fca5a5;
+    color: var(--text-muted);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    transition: background-color var(--theme-transition), border-color var(--theme-transition), color var(--theme-transition);
 }
 
 .card-description {
@@ -302,6 +321,7 @@ textarea:focus {
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
     flex-grow: 1;
+    transition: color var(--theme-transition);
 }
 
 .card-footer {
@@ -312,14 +332,41 @@ textarea:focus {
     padding-top: 1rem;
     font-size: 0.8rem;
     color: var(--text-muted);
+    transition: border-color var(--theme-transition), color var(--theme-transition);
 }
 
 .card-link {
     color: var(--accent-cyan);
     text-decoration: none;
     font-weight: 500;
+    transition: color var(--theme-transition);
 }
 
 .card-link:hover {
     text-decoration: underline;
+}
+
+.theme-toggle-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.65rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    transition: color var(--theme-transition), border-color var(--theme-transition), background-color var(--theme-transition);
+}
+
+.theme-toggle-btn:hover {
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    background-color: var(--bg-card);
+}
+
+.theme-toggle-btn:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
 }

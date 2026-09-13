@@ -154,3 +154,43 @@ form.addEventListener("submit", (e: SubmitEvent) => {
 });
 
 renderProblems(problemsList);
+
+const themeToggleBtn = document.getElementById("theme-toggle") as HTMLButtonElement;
+const themeStatus = document.getElementById("theme-status") as HTMLSpanElement;
+
+type Theme = "light" | "dark";
+
+function getPreferredTheme(): Theme {
+    const storedTheme = localStorage.getItem("theme") as Theme | null;
+    if (storedTheme === "light" || storedTheme === "dark") {
+        return storedTheme;
+    }
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+
+function applyTheme(theme: Theme): void {
+    document.documentElement.setAttribute("data-theme", theme);
+    themeStatus.textContent = theme;
+}
+
+document.body.classList.add("preload");
+
+let currentTheme: Theme = getPreferredTheme();
+applyTheme(currentTheme);
+
+requestAnimationFrame(() => {
+    document.body.classList.remove("preload");
+});
+
+themeToggleBtn.addEventListener("click", () => {
+    currentTheme = currentTheme === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", currentTheme);
+    applyTheme(currentTheme);
+});
+
+window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e) => {
+    if (!localStorage.getItem("theme")) {
+        currentTheme = e.matches ? "light" : "dark";
+        applyTheme(currentTheme);
+    }
+});
