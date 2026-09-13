@@ -193,6 +193,13 @@ textarea:focus {
     opacity: 0.9;
 }
 
+.btn-submit:disabled {
+    background-color: var(--bg-primary);
+    color: var(--text-muted);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .success-banner {
     margin-top: 1rem;
     padding: 0.75rem;
