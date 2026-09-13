@@ -38,10 +38,10 @@
             </div>
         </section>
 
-        <section id="catalog" class="catalog-section">
+        <section id="catalog" class="catalog-section" aria-labelledby="catalog-heading">
             <div class="section-heading">
-                <h2>Curated Problemset</h2>
-                <p>Filter by algorithmic topic and difficulty level.</p>
+                <h2 id="catalog-heading">Curated Problemset</h2>
+                <p>Filter by algorithmic topic, difficulty level, and judging platform.</p>
             </div>
 
             <section class="filters-container" aria-label="Catalog Filters">
@@ -63,6 +63,7 @@
                         <option value="hard">Hard</option>
                     </select>
                 </div>
+
                 <div class="filter-group">
                     <label for="filter-source">Platform:</label>
                     <select id="filter-source">
@@ -75,37 +76,38 @@
                 </div>
             </section>
 
-
-
-            <div id="problems-grid" class="problems-grid" role="region" aria-live="polite">
-                <!-- Container para la futura renderizacion de problemas -->
+            <div id="problems-grid" class="problems-grid" role="region" aria-live="polite"
+                aria-label="Problems Catalog">
+                <!-- Cards renderizadas dinámicamente -->
             </div>
         </section>
 
-        <section id="submit" class="form-section">
+        <section id="submit" class="form-section" aria-labelledby="form-heading">
             <div class="form-container">
-                <h2>Suggest a Problem</h2>
+                <h2 id="form-heading">Suggest a Problem</h2>
                 <p>Found a benchmark problem during a contest? Add it to the practice backlog.</p>
 
                 <form id="suggest-form" novalidate>
                     <div class="form-control">
                         <label for="problem-name">Problem Name</label>
                         <input type="text" id="problem-name" name="name"
-                            placeholder="e.g. Flight Discount or Convex Hull">
+                            placeholder="e.g. Flight Discount or Convex Hull" aria-required="true"
+                            aria-describedby="error-name">
                         <span class="error-msg" id="error-name" aria-live="polite"></span>
                     </div>
 
                     <div class="form-control">
                         <label for="problem-link">Problem URL</label>
                         <input type="url" id="problem-link" name="link"
-                            placeholder="https://codeforces.com/problemset/problem/...">
+                            placeholder="https://codeforces.com/problemset/problem/..." aria-required="true"
+                            aria-describedby="error-link">
                         <span class="error-msg" id="error-link" aria-live="polite"></span>
                     </div>
 
                     <div class="form-row">
                         <div class="form-control">
                             <label for="form-topic">Topic</label>
-                            <select id="form-topic" name="topic">
+                            <select id="form-topic" name="topic" aria-required="true" aria-describedby="error-topic">
                                 <option value="">Select topic...</option>
                                 <option value="graphs">Graphs</option>
                                 <option value="geometry">Computational Geometry</option>
@@ -115,7 +117,8 @@
 
                         <div class="form-control">
                             <label for="form-difficulty">Difficulty Rating</label>
-                            <select id="form-difficulty" name="difficulty">
+                            <select id="form-difficulty" name="difficulty" aria-required="true"
+                                aria-describedby="error-difficulty">
                                 <option value="">Select level...</option>
                                 <option value="easy">Easy</option>
                                 <option value="medium">Medium</option>
@@ -128,12 +131,13 @@
                     <div class="form-control">
                         <label for="problem-desc">Editorial Summary (min 20 chars)</label>
                         <textarea id="problem-desc" name="description" rows="3"
-                            placeholder="Briefly describe the key algorithmic technique (e.g. Graham Scan, DSU, Dinic)"></textarea>
+                            placeholder="Briefly describe the key algorithmic technique (e.g. Graham Scan, DSU, Dinic)"
+                            aria-required="true" aria-describedby="error-desc"></textarea>
                         <span class="error-msg" id="error-desc" aria-live="polite"></span>
                     </div>
 
                     <button type="submit" class="btn-submit">Submit Problem</button>
-                    <div id="form-success" class="success-banner" hidden>
+                    <div id="form-success" class="success-banner" role="status" aria-live="polite" hidden>
                         Problem added to local review queue!
                     </div>
                 </form>

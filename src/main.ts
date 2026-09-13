@@ -31,6 +31,30 @@ function detectSource(url: string): string {
     return "Community";
 }
 
+function getPlatformIcon(source: string): string {
+    const icons: Record<string, { src: string; alt: string }> = {
+        Codeforces: {
+            src: "./assets/icons/codeforces.svg",
+            alt: "Codeforces online judge icon"
+        },
+        CSES: {
+            src: "./assets/icons/cses.png",
+            alt: "CSES problem set official wooden logo"
+        },
+        AtCoder: {
+            src: "./assets/icons/atcoder.svg",
+            alt: "AtCoder contest platform icon"
+        },
+        Community: {
+            src: "./assets/icons/community.svg",
+            alt: "Community contribution problem icon"
+        }
+    };
+
+    const iconData = icons[source] || icons.Community;
+    return `<img src="${iconData!.src}" alt="${iconData!.alt}" class="platform-icon" width="16" height="16" loading="lazy">`;
+}
+
 function renderProblems(items: Problem[]): void {
     grid.innerHTML = "";
 
@@ -54,8 +78,13 @@ function renderProblems(items: Problem[]): void {
         <p class="card-description">${p.description}</p>
       </div>
       <div class="card-footer">
-        <span>${p.source}</span>
-        <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="card-link">View Problem &rarr;</a>
+        <span class="platform-tag">
+            ${getPlatformIcon(p.source)}
+            <span>${p.source}</span>
+        </span>
+        <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="card-link" aria-label="View problem ${p.name} on external judge">
+            View Problem &rarr;
+        </a>
       </div>
     `;
         grid.appendChild(card);
@@ -170,6 +199,7 @@ form.addEventListener("submit", (e: SubmitEvent) => {
 
 renderProblems(problemsList);
 
+// --- Theme Management ---
 const themeToggleBtn = document.getElementById("theme-toggle") as HTMLButtonElement;
 const themeStatus = document.getElementById("theme-status") as HTMLSpanElement;
 
