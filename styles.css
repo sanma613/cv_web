@@ -384,19 +384,21 @@ textarea:focus {
     line-height: 1.55;
     margin-bottom: 1.5rem;
     flex-grow: 1;
-    max-height: 4.65rem;
+    height: 4.65rem;
     overflow: hidden;
     position: relative;
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
     transition: color var(--theme-transition);
 }
 
-.card-description::after {
+.card-description.is-overflowing::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 1.8rem;
+    height: 1.6rem;
     background: linear-gradient(to bottom, transparent, var(--bg-card));
     pointer-events: none;
     transition: background var(--theme-transition);

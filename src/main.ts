@@ -88,6 +88,11 @@ function renderProblems(items: Problem[]): void {
       </div>
     `;
         grid.appendChild(card);
+
+        const descEl = card.querySelector(".card-description") as HTMLParagraphElement;
+        if (descEl && descEl.scrollHeight > descEl.clientHeight) {
+            descEl.classList.add("is-overflowing");
+        }
     });
 }
 
