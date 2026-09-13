@@ -3,4 +3,5 @@ Para documentar las decisiones sobre la marcha y no dejar todo para el final, ir
 # Decisiones:
 - A pesar de que en la rubrica planteada en la UVirtual especifica el uso de JavaScript, se decide usar TypeScript debido a que es con lo que hemos venido trabajando, además de que nos brinda mayor seguridad en el tipado.
 - El contenido del HTML sera todo en ingles debido a que es el estandar en programacion, ademas de que asi es como se presentan dichos problemas y es con lo que la comunidad de PC (programacion competitiva) esta familiarizada.
-
+- Uso de variables en CSS para evitar duplicar codigo y centralizar estilos para cambios mas rapidos.
+- Se introduce --accent-red exclusivamente para los mensajes de error del formulario. Se maqueta el contenedor centrado del formulario y el footer.
