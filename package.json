@@ -1,0 +1,21 @@
+{
+  "name": "icpc-grind",
+  "version": "1.0.0",
+  "description": "Hub de práctica de programación competitiva en grafos y geometría",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "icpc",
+    "competitive-programming",
+    "graphs",
+    "geometry"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
