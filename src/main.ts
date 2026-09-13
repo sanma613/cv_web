@@ -59,7 +59,7 @@ function renderProblems(items: Problem[]): void {
     grid.innerHTML = "";
 
     if (items.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No problems match the selected filters.</p>`;
+        grid.innerHTML = `<p class="empty-catalog">No problems match the selected filters.</p>`;
         return;
     }
 

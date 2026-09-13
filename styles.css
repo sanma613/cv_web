@@ -442,3 +442,10 @@ textarea:focus {
     border-color: var(--accent-cyan);
     background-color: var(--bg-card);
 }
+
+.empty-catalog {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem 0;
+}
