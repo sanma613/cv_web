@@ -6,6 +6,7 @@ const problemsList: Problem[] = [...initialProblems];
 const grid = document.getElementById("problems-grid") as HTMLDivElement;
 const filterTopic = document.getElementById("filter-topic") as HTMLSelectElement;
 const filterDifficulty = document.getElementById("filter-difficulty") as HTMLSelectElement;
+const filterSource = document.getElementById("filter-source") as HTMLSelectElement;
 
 const form = document.getElementById("suggest-form") as HTMLFormElement;
 const inputName = document.getElementById("problem-name") as HTMLInputElement;
@@ -21,6 +22,14 @@ const errorLink = document.getElementById("error-link") as HTMLSpanElement;
 const errorTopic = document.getElementById("error-topic") as HTMLSpanElement;
 const errorDiff = document.getElementById("error-difficulty") as HTMLSpanElement;
 const errorDesc = document.getElementById("error-desc") as HTMLSpanElement;
+
+function detectSource(url: string): string {
+    const lower = url.toLowerCase();
+    if (lower.includes("codeforces.com")) return "Codeforces";
+    if (lower.includes("cses.fi")) return "CSES";
+    if (lower.includes("atcoder.jp")) return "AtCoder";
+    return "Community";
+}
 
 function renderProblems(items: Problem[]): void {
     grid.innerHTML = "";
@@ -45,7 +54,7 @@ function renderProblems(items: Problem[]): void {
         <p class="card-description">${p.description}</p>
       </div>
       <div class="card-footer">
-        <span>${p.source} (${p.year})</span>
+        <span>${p.source}</span>
         <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="card-link">View Problem &rarr;</a>
       </div>
     `;
@@ -56,11 +65,13 @@ function renderProblems(items: Problem[]): void {
 function applyFilters(): void {
     const selectedTopic = filterTopic.value;
     const selectedDiff = filterDifficulty.value;
+    const selectedSource = filterSource ? filterSource.value : "all";
 
     const filtered = problemsList.filter((p) => {
         const matchesTopic = selectedTopic === "all" || p.topic === selectedTopic;
         const matchesDiff = selectedDiff === "all" || p.difficulty === selectedDiff;
-        return matchesTopic && matchesDiff;
+        const matchesSource = selectedSource === "all" || p.source.toLowerCase() === selectedSource.toLowerCase();
+        return matchesTopic && matchesDiff && matchesSource;
     });
 
     renderProblems(filtered);
@@ -85,6 +96,9 @@ function isValidHttpUrl(str: string): boolean {
 
 filterTopic.addEventListener("change", applyFilters);
 filterDifficulty.addEventListener("change", applyFilters);
+if (filterSource) {
+    filterSource.addEventListener("change", applyFilters);
+}
 
 form.addEventListener("submit", (e: SubmitEvent) => {
     e.preventDefault();
@@ -127,14 +141,15 @@ form.addEventListener("submit", (e: SubmitEvent) => {
     submitBtn.textContent = "Submitting...";
 
     setTimeout(() => {
+        const cleanLink = inputLink.value.trim();
         const newProblem: Problem = {
             id: problemsList.length + 1,
             name: inputName.value.trim(),
             topic: selectTopic.value as Topic,
             difficulty: selectDiff.value as Difficulty,
-            source: "Community",
+            source: detectSource(cleanLink),
             year: new Date().getFullYear(),
-            link: inputLink.value.trim(),
+            link: cleanLink,
             description: textDesc.value.trim()
         };
 
