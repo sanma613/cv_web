@@ -13,6 +13,7 @@ const inputLink = document.getElementById("problem-link") as HTMLInputElement;
 const selectTopic = document.getElementById("form-topic") as HTMLSelectElement;
 const selectDiff = document.getElementById("form-difficulty") as HTMLSelectElement;
 const textDesc = document.getElementById("problem-desc") as HTMLTextAreaElement;
+const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
 const successBanner = document.getElementById("form-success") as HTMLDivElement;
 
 const errorName = document.getElementById("error-name") as HTMLSpanElement;
@@ -98,7 +99,7 @@ form.addEventListener("submit", (e: SubmitEvent) => {
     }
 
     if (!inputLink.value.trim()) {
-        errorLink.textContent = "Problem link is required.";
+        errorLink.textContent = "Problem URL is required.";
         isValid = false;
     } else if (!isValidHttpUrl(inputLink.value.trim())) {
         errorLink.textContent = "Enter a valid URL (e.g. https://...).";
@@ -122,22 +123,34 @@ form.addEventListener("submit", (e: SubmitEvent) => {
 
     if (!isValid) return;
 
-    const newProblem: Problem = {
-        id: problemsList.length + 1,
-        name: inputName.value.trim(),
-        topic: selectTopic.value as Topic,
-        difficulty: selectDiff.value as Difficulty,
-        source: "Community",
-        year: new Date().getFullYear(),
-        link: inputLink.value.trim(),
-        description: textDesc.value.trim()
-    };
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
 
-    problemsList.unshift(newProblem);
-    applyFilters();
+    setTimeout(() => {
+        const newProblem: Problem = {
+            id: problemsList.length + 1,
+            name: inputName.value.trim(),
+            topic: selectTopic.value as Topic,
+            difficulty: selectDiff.value as Difficulty,
+            source: "Community",
+            year: new Date().getFullYear(),
+            link: inputLink.value.trim(),
+            description: textDesc.value.trim()
+        };
 
-    form.reset();
-    successBanner.hidden = false;
+        problemsList.unshift(newProblem);
+        applyFilters();
+
+        form.reset();
+        successBanner.hidden = false;
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Problem";
+
+        setTimeout(() => {
+            successBanner.hidden = true;
+        }, 3000);
+    }, 1000);
 });
 
 renderProblems(problemsList);
